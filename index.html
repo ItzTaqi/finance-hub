@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinanceHub - Learn, Manage, Invest</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <div class="logo-icon">💰</div>
+                <h1>FinanceHub</h1>
+            </div>
+            <nav class="nav-tabs">
+                <button class="nav-tab active" data-tab="dashboard">📊 Dashboard</button>
+                <button class="nav-tab" data-tab="learn">🎓 Learn</button>
+                <button class="nav-tab" data-tab="budget">💵 Budget</button>
+                <button class="nav-tab" data-tab="investments">📈 Investments</button>
+                <button class="nav-tab" data-tab="goals">🎯 Goals</button>
+            </nav>
+        </header>
+
+        <!-- Main Content -->
+        <main class="content">
+            <!-- Dashboard Section -->
+            <section id="dashboard" class="section active">
+                <h2 class="section-title">Welcome Back! 👋</h2>
+                <p class="section-subtitle">Here's your financial overview</p>
+
+                <div class="dashboard-grid">
+                    <div class="stat-card">
+                        <div class="stat-label">Total Balance</div>
+                        <div class="stat-value" id="totalBalance">$0</div>
+                        <div class="stat-change">Updated just now</div>
+                    </div>
+                    <div class="stat-card green">
+                        <div class="stat-label">Monthly Income</div>
+                        <div class="stat-value" id="monthlyIncome">$0</div>
+                        <div class="stat-change">This month</div>
+                    </div>
+                    <div class="stat-card orange">
+                        <div class="stat-label">Monthly Expenses</div>
+                        <div class="stat-value" id="monthlyExpenses">$0</div>
+                        <div class="stat-change">This month</div>
+                    </div>
+                    <div class="stat-card red">
+                        <div class="stat-label">Investment Value</div>
+                        <div class="stat-value" id="investmentValue">$0</div>
+                        <div class="stat-change" id="investmentChange">+0%</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Learning Progress</h3>
+                        <span id="overallProgress">0% Complete</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="overallProgressBar" style="width: 0%"></div>
+                    </div>
+                    <p style="margin-top: 12px; color: var(--gray);">Keep learning to unlock financial success! 🚀</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Recent Activity</h3>
+                    </div>
+                    <div id="recentActivity">
+                        <p style="color: var(--gray); text-align: center; padding: 20px;">No recent activity. Start by adding transactions or completing learning modules!</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Quick Actions</h3>
+                    </div>
+                    <div class="flex gap-2" style="flex-wrap: wrap;">
+                        <button class="btn btn-primary" onclick="switchTab('budget')">💵 Add Transaction</button>
+                        <button class="btn btn-success" onclick="switchTab('investments')">📈 Track Investment</button>
+                        <button class="btn btn-secondary" onclick="switchTab('learn')">🎓 Continue Learning</button>
+                        <button class="btn btn-secondary" onclick="switchTab('goals')">🎯 Set Goal</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Learn Section -->
+            <section id="learn" class="section">
+                <h2 class="section-title">Financial Education 🎓</h2>
+                <p class="section-subtitle">Master finance through interactive lessons and quizzes</p>
+
+                <div class="modules-grid">
+                    <div class="module-card" onclick="openModule('basics')">
+                        <div class="module-icon">📚</div>
+                        <h3 class="module-title">Finance Basics</h3>
+                        <p class="module-description">Learn fundamental concepts like budgeting, saving, and compound interest</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progress-basics" style="width: 0%"></div>
+                        </div>
+                        <p class="progress-text"><span id="progress-basics-text">0%</span> Complete</p>
+                    </div>
+
+                    <div class="module-card" onclick="openModule('investing')">
+                        <div class="module-icon">📈</div>
+                        <h3 class="module-title">Investing 101</h3>
+                        <p class="module-description">Understand stocks, bonds, ETFs, and how to build a diversified portfolio</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progress-investing" style="width: 0%"></div>
+                        </div>
+                        <p class="progress-text"><span id="progress-investing-text">0%</span> Complete</p>
+                    </div>
+
+                    <div class="module-card" onclick="openModule('crypto')">
+                        <div class="module-icon">₿</div>
+                        <h3 class="module-title">Cryptocurrency</h3>
+                        <p class="module-description">Explore blockchain, Bitcoin, Ethereum, and crypto investment strategies</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progress-crypto" style="width: 0%"></div>
+                        </div>
+                        <p class="progress-text"><span id="progress-crypto-text">0%</span> Complete</p>
+                    </div>
+
+                    <div class="module-card" onclick="openModule('retirement')">
+                        <div class="module-icon">🏖️</div>
+                        <h3 class="module-title">Retirement Planning</h3>
+                        <p class="module-description">Learn about 401(k), IRA, and strategies for long-term wealth building</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progress-retirement" style="width: 0%"></div>
+                        </div>
+                        <p class="progress-text"><span id="progress-retirement-text">0%</span> Complete</p>
+                    </div>
+
+                    <div class="module-card" onclick="openModule('taxes')">
+                        <div class="module-icon">📋</div>
+                        <h3 class="module-title">Taxes & Deductions</h3>
+                        <p class="module-description">Understand tax brackets, deductions, and how to optimize your tax strategy</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progress-taxes" style="width: 0%"></div>
+                        </div>
+                        <p class="progress-text"><span id="progress-taxes-text">0%</span> Complete</p>
+                    </div>
+
+                    <div class="module-card" onclick="openModule('credit')">
+                        <div class="module-icon">💳</div>
+                        <h3 class="module-title">Credit & Debt</h3>
+                        <p class="module-description">Master credit scores, debt management, and smart borrowing strategies</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progress-credit" style="width: 0%"></div>
+                        </div>
+                        <p class="progress-text"><span id="progress-credit-text">0%</span> Complete</p>
+                    </div>
+                </div>
+
+                <!-- Module Content (Hidden by default) -->
+                <div id="moduleContent" class="card hidden" style="margin-top: 32px;">
+                    <div class="card-header">
+                        <h3 class="card-title" id="moduleTitle"></h3>
+                        <button class="btn btn-secondary" onclick="closeModule()">← Back to Modules</button>
+                    </div>
+                    <div id="moduleBody"></div>
+                </div>
+            </section>
+
+            <!-- Budget Section -->
+            <section id="budget" class="section">
+                <h2 class="section-title">Budget Manager 💵</h2>
+                <p class="section-subtitle">Track your income and expenses to stay on top of your finances</p>
+
+                <div class="card">
+                    <h3 class="card-title">Add Transaction</h3>
+                    <form id="transactionForm" onsubmit="addTransaction(event)">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Type</label>
+                                <select class="form-select" id="transactionType" required>
+                                    <option value="income">Income</option>
+                                    <option value="expense">Expense</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Category</label>
+                                <select class="form-select" id="transactionCategory" required>
+                                    <option value="salary">Salary</option>
+                                    <option value="freelance">Freelance</option>
+                                    <option value="food">Food & Dining</option>
+                                    <option value="transport">Transportation</option>
+                                    <option value="entertainment">Entertainment</option>
+                                    <option value="utilities">Utilities</option>
+                                    <option value="shopping">Shopping</option>
+                                    <option value="healthcare">Healthcare</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Amount ($)</label>
+                                <input type="number" class="form-input" id="transactionAmount" step="0.01" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Date</label>
+                                <input type="date" class="form-input" id="transactionDate" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Description</label>
+                            <input type="text" class="form-input" id="transactionDescription" placeholder="Optional description">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Add Transaction</button>
+                    </form>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Transaction History</h3>
+                        <button class="btn btn-secondary" onclick="clearTransactions()">Clear All</button>
+                    </div>
+                    <div style="overflow-x: auto;">
+                        <table class="table" id="transactionTable">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Type</th>
+                                    <th>Category</th>
+                                    <th>Description</th>
+                                    <th>Amount</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="transactionTableBody">
+                                <tr>
+                                    <td colspan="6" style="text-align: center; color: var(--gray);">No transactions yet. Add your first transaction above!</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="dashboard-grid">
+                    <div class="card">
+                        <h3 class="card-title">Monthly Summary</h3>
+                        <div style="margin-top: 20px;">
+                            <div class="flex-between" style="margin-bottom: 12px;">
+                                <span>Income:</span>
+                                <span style="color: var(--secondary); font-weight: 600;" id="summaryIncome">$0.00</span>
+                            </div>
+                            <div class="flex-between" style="margin-bottom: 12px;">
+                                <span>Expenses:</span>
+                                <span style="color: var(--danger); font-weight: 600;" id="summaryExpenses">$0.00</span>
+                            </div>
+                            <div class="flex-between" style="padding-top: 12px; border-top: 2px solid var(--border);">
+                                <span style="font-weight: 600;">Net:</span>
+                                <span style="font-weight: 700; font-size: 20px;" id="summaryNet">$0.00</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Investments Section -->
+            <section id="investments" class="section">
+                <h2 class="section-title">Investment Portfolio 📈</h2>
+                <p class="section-subtitle">Track your stocks and crypto investments in one place</p>
+
+                <div class="card">
+                    <h3 class="card-title">Add Investment</h3>
+                    <form id="investmentForm" onsubmit="addInvestment(event)">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Type</label>
+                                <select class="form-select" id="investmentType" required>
+                                    <option value="stock">Stock</option>
+                                    <option value="crypto">Cryptocurrency</option>
+                                    <option value="etf">ETF</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Symbol/Name</label>
+                                <input type="text" class="form-input" id="investmentSymbol" placeholder="e.g., AAPL, BTC" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Quantity</label>
+                                <input type="number" class="form-input" id="investmentQuantity" step="0.00001" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Purchase Price ($)</label>
+                                <input type="number" class="form-input" id="investmentPrice" step="0.01" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Current Price ($)</label>
+                                <input type="number" class="form-input" id="investmentCurrentPrice" step="0.01" required>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Add Investment</button>
+                    </form>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Your Portfolio</h3>
+                        <button class="btn btn-secondary" onclick="clearInvestments()">Clear All</button>
+                    </div>
+                    <div class="investment-grid" id="investmentGrid">
+                        <p style="text-align: center; color: var(--gray); grid-column: 1/-1; padding: 40px;">No investments yet. Add your first investment above!</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Portfolio Summary</h3>
+                    <div style="margin-top: 20px;">
+                        <div class="flex-between" style="margin-bottom: 12px;">
+                            <span>Total Invested:</span>
+                            <span style="font-weight: 600;" id="totalInvested">$0.00</span>
+                        </div>
+                        <div class="flex-between" style="margin-bottom: 12px;">
+                            <span>Current Value:</span>
+                            <span style="font-weight: 600;" id="currentValue">$0.00</span>
+                        </div>
+                        <div class="flex-between" style="padding-top: 12px; border-top: 2px solid var(--border);">
+                            <span style="font-weight: 600;">Total Gain/Loss:</span>
+                            <span style="font-weight: 700; font-size: 20px;" id="totalGainLoss">$0.00 (0%)</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Goals Section -->
+            <section id="goals" class="section">
+                <h2 class="section-title">Financial Goals 🎯</h2>
+                <p class="section-subtitle">Set and track your financial milestones</p>
+
+                <div class="card">
+                    <h3 class="card-title">Create New Goal</h3>
+                    <form id="goalForm" onsubmit="addGoal(event)">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Goal Name</label>
+                                <input type="text" class="form-input" id="goalName" placeholder="e.g., Emergency Fund" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Target Amount ($)</label>
+                                <input type="number" class="form-input" id="goalTarget" step="0.01" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Current Amount ($)</label>
+                                <input type="number" class="form-input" id="goalCurrent" step="0.01" value="0" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Target Date</label>
+                                <input type="date" class="form-input" id="goalDate" required>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Create Goal</button>
+                    </form>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Your Goals</h3>
+                        <button class="btn btn-secondary" onclick="clearGoals()">Clear All</button>
+                    </div>
+                    <div id="goalsList">
+                        <p style="text-align: center; color: var(--gray); padding: 40px;">No goals yet. Create your first financial goal above!</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
